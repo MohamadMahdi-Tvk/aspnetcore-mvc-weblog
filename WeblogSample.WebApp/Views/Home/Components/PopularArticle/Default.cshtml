@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ArticleListDto>
+
+@{
+    var list = Model?.ToList() ?? new List<ArticleListDto>();
+}
+
+
+<aside class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
+    <div class="bg-white rounded-3 p-3 shadow-sm">
+        <h4 class="text-center mb-3 fw-bold">مطالب پربازدید</h4>
+
+        @if (!list.Any())
+        {
+            <h4 class="text-light p-1 text-bg-danger rounded-4 text-center">مقاله‌ای وجود ندارد</h4>
+        }
+        else
+        {
+            foreach (var article in list)
+            {
+                <div class="popular-post d-flex mb-3 align-items-center">
+                    <img src="@article.ImagePath"
+                         class="post-thumb rounded-3 me-2"
+                         alt="" />
+                    <a asp-controller="Article" asp-action="ShowArticle" asp-route-id="@article.Id"
+                       class="text-decoration-none link-primary small-text fw-bold">
+                        @article.Title
+                    </a>
+                </div>
+            }
+        }
+
+    </div>
+</aside>

@@ -1,0 +1,21 @@
+﻿@model CreateCommentViewModel
+
+<div class="section card p-4">
+    <h4 class="mb-3">پاسخ به کامنت</h4>
+
+    <form asp-controller="Comment" asp-action="ReplayComment" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <input type="hidden" asp-for="ArticleId" />
+        <input type="hidden" asp-for="PersonId" />
+        <input type="hidden" asp-for="ParentId" />
+
+        <div class="mb-3">
+            <label class="form-label">متن کامنت</label>
+            <textarea asp-for="Text" class="form-control" rows="6"></textarea>
+            <span asp-validation-for="Text" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">ارسال پاسخ</button>
+    </form>
+</div>

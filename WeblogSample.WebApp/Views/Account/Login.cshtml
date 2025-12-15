@@ -1,0 +1,37 @@
+﻿@model LoginViewModel
+
+@{
+    Layout = "_AuthLayout";
+}
+
+<div class="col-md-4">
+    <div class="card shadow p-4">
+
+        <h4 class="text-center mb-4">ورود به حساب کاربری</h4>
+
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label class="form-label">نام کاربری</label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">رمز عبور</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+                ورود
+            </button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a asp-controller="Account" asp-action="Register">حساب کاربری ندارید؟ ثبت نام</a>
+        </div>
+
+    </div>
+</div>

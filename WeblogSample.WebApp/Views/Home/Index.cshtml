@@ -1,0 +1,8 @@
+﻿
+<!--========== Sidebar ==========-->
+@await Component.InvokeAsync("PopularArticle")
+
+
+
+<!--========== Articles Section ==========-->
+@await Component.InvokeAsync("LastArticles", new { page = ViewBag.PageNumber })

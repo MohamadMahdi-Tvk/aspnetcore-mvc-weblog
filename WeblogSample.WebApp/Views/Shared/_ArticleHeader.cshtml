@@ -1,0 +1,33 @@
+﻿
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">وبلاگ من</a>
+
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link" asp-controller="Account" asp-action="Login">ثبت نام / ورود</a>
+
+                    }
+                    else
+                    {
+                        <a class="nav-link" asp-controller="Account" asp-action="Logout">خروج از حساب کاربری</a>
+                    }
+                </li>
+
+                <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="AboutUs">درباره ما</a></li>
+            </ul>
+
+            <button id="darkToggle" class="btn btn-dark">دارک مود</button>
+        </div>
+    </div>
+</nav>

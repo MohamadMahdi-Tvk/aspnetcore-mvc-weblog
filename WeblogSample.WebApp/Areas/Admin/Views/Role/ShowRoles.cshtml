@@ -1,0 +1,31 @@
+﻿@model List<RoleDto>
+
+
+<div id="roleList" class="section card p-4">
+    <h4 class="mb-3">لیست نقش‌های کاربری</h4>
+
+    <a class="btn btn-primary mb-3" asp-action="CreateRole">
+        ➕ افزودن نقش جدید
+    </a>
+
+    <ul class="list-group">
+
+        @foreach (var role in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between">
+                @role.Name
+                <span>
+                    <a class="btn btn-sm btn-outline-warning"
+                            asp-action="UpdateRole" asp-route-Id="@role.Id">
+                        ویرایش
+                    </a>
+                    <a class="btn btn-sm btn-outline-danger"
+                            asp-action="RemoveRole" asp-route-Id="@role.Id">
+                        حذف
+                    </a>
+                </span>
+            </li>
+        }
+
+    </ul>
+</div>

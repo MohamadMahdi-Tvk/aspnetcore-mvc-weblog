@@ -1,0 +1,8 @@
+﻿@model List<CategoryDto>
+
+@foreach (var category in Model)
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Article" asp-action="ShowArticlesByCategoryId" asp-route-categoryId="@category.Id">@category.Name</a>
+    </li>
+}

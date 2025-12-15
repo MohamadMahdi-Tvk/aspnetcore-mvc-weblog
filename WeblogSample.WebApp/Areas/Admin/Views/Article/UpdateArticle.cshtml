@@ -1,0 +1,139 @@
+﻿@model UpdateArticleViewModel
+
+<div id="editArticle1" class="section card p-4">
+    <h4 class="mb-3">ویرایش مقاله</h4>
+    <form asp-controller="Article" asp-action="UpdateArticle" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImagePath" />
+
+        <div class="mb-3">
+            <label class="form-label">موضوع مقاله</label>
+            <input type="text" class="form-control" asp-for="Title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">توضیحات کوتاه</label>
+            <input type="text" class="form-control" asp-for="ShortDescription" />
+            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">دسته بندی مقاله</label>
+            <select class="form-select" asp-for="CategoryId"
+                    asp-items="@(ViewBag.Categories != null ? new SelectList(ViewBag.Categories, "Id", "Name") : new SelectList(Enumerable.Empty<CategoryDto>(), "Id", "Name"))">
+                <option value="">انتخاب کنید ...</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label d-block">عکس مقاله</label>
+            <img id="previewImage" src="@Model.ImagePath" alt="عکس مقاله"
+                 class="img-thumbnail" style="max-width: 250px;" />
+            <p class="text-muted mt-2">
+                در صورت انتخاب عکس جدید، آن تصویر جایگزین خواهد شد.
+            </p>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">انتخاب عکس جدید</label>
+            <input type="file" class="form-control" asp-for="ImageFile" id="imageFileInput" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">متن مقاله</label>
+            <textarea class="form-control" rows="6" asp-for="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">اعمال تغییرات</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        const imageInput = document.getElementById('imageFileInput');
+        const previewImage = document.getElementById('previewImage');
+
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                
+                previewImage.src = '@Model.ImagePath';
+            }
+        });
+    </script>
+}
+
+
+@* @model UpdateArticleViewModel
+
+
+<div id="editArticle1" class="section card p-4">
+    <h4 class="mb-3">ویرایش مقاله</h4>
+    <form asp-controller="Article" asp-action="UpdateArticle" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="ImagePath" />
+        <div class="mb-3">
+            <label class="form-label">موضوع مقاله</label>
+            <input type="text" class="form-control" asp-for="Title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">توضیحات کوتاه</label>
+            <input type="text" class="form-control" asp-for="ShortDescription" />
+            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">دسته بندی مقاله</label>
+
+            <select class="form-select" asp-for="CategoryId"
+                    asp-items="@(ViewBag.Categories != null ? new SelectList(ViewBag.Categories, "Id", "Name") : new SelectList(Enumerable.Empty<CategoryDto>(), "Id", "Name"))">
+                <option value="">انتخاب کنید ...</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <div class="mb-3">
+                <label class="form-label d-block">عکس فعلی مقاله</label>
+
+                <img src="@Model.ImagePath"
+                     alt="عکس مقاله"
+                     class="img-thumbnail"
+                     style="max-width: 250px;" />
+
+                <p class="text-muted mt-2">
+                    در صورت انتخاب عکس جدید، آن تصویر جایگزین خواهد شد.
+                </p>
+            </div>
+        }
+
+        <div class="mb-3">
+            <label class="form-label">انتخاب عکس جدید (اختیاری)</label>
+            <input type="file" class="form-control" asp-for="ImageFile" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">متن مقاله</label>
+            <textarea class="form-control" rows="6" asp-for="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary w-100">اعمال تغییرات</button>
+    </form>
+</div> *@

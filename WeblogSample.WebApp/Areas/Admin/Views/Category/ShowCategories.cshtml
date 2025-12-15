@@ -1,0 +1,26 @@
+﻿@model List<CategoryDto>
+
+<div id="roleList" class="section card p-4">
+    <h4 class="mb-3">لیست دسته بندی ها</h4>
+
+    <ul class="list-group">
+
+        @foreach (var category in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between">
+                @category.Name
+                <span>
+                    <a class="btn btn-sm btn-outline-warning"
+                       asp-action="UpdateCategory" asp-route-Id="@category.Id">
+                        ویرایش
+                    </a>
+                    <a class="btn btn-sm btn-outline-danger"
+                       asp-action="RemoveCategory" asp-route-Id="@category.Id">
+                        حذف
+                    </a>
+                </span>
+            </li>
+        }
+
+    </ul>
+</div>

@@ -1,0 +1,16 @@
+﻿@model CreateRoleViewModel
+
+<div id="addRole" class="section card p-4">
+
+    <h4 class="mb-3">افزودن نقش جدید</h4>
+
+    <form asp-controller="Role" asp-action="CreateRole" method="post" >
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label class="form-label">نام نقش کاربری</label>
+            <input type="text" class="form-control" asp-for="Name" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-success w-100">افزودن</button>
+    </form>
+</div>

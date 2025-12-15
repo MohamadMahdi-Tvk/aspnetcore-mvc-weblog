@@ -1,0 +1,70 @@
+﻿@model CreateArticleViewModel
+
+<div id="addArticle" class="section card p-4">
+    <h4 class="mb-3">افزودن مقاله جدید</h4>
+    <form asp-controller="Article" asp-action="CreateArticle" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <div class="mb-3">
+            <label class="form-label">موضوع مقاله</label>
+            <input type="text" class="form-control" asp-for="Title" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">توضیحات کوتاه</label>
+            <input type="text" class="form-control" asp-for="ShortDescription" />
+            <span asp-validation-for="ShortDescription" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">دسته بندی مقاله</label>
+
+            <select class="form-select" asp-for="CategoryId"
+                    asp-items="@(ViewBag.Categories != null ? new SelectList(ViewBag.Categories, "Id", "Name") : new SelectList(Enumerable.Empty<CategoryDto>(), "Id", "Name"))">
+                <option value="">انتخاب کنید ...</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">عکس مقاله</label>
+            <input type="file" class="form-control" asp-for="ImageFile" id="imageFileInput" />
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+
+
+            <div class="mt-2">
+                <img id="previewImage" src="" alt="پیش‌نمایش تصویر" class="img-thumbnail" style="max-width: 250px; display: none;" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">متن کامل مقاله</label>
+            <textarea asp-for="Description" class="form-control" rows="6"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">ثبت مقاله</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        const imageInput = document.getElementById('imageFileInput');
+        const previewImage = document.getElementById('previewImage');
+
+        imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = '';
+                previewImage.style.display = 'none';
+            }
+        });
+    </script>
+}

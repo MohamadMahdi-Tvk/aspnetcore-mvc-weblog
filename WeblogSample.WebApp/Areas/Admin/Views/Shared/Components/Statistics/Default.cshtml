@@ -1,0 +1,10 @@
+﻿@model StatisticsDto
+
+<div id="dashboard" class="section card p-4">
+    <h4 class="mb-3">خوش آمدید، ادمین</h4>
+    <p id="currentTime"></p>
+    <hr />
+    <p>تعداد کاربران ثبت شده: <strong id="totalUsers">@Model.UserCount</strong></p>
+    <p>تعداد مقالات درج شده: <strong id="totalArticles">@Model.ArticleCount</strong></p>
+    <p>تعداد کل کامنت‌ها: <strong id="totalComments">@Model.CommentCount</strong></p>
+</div>

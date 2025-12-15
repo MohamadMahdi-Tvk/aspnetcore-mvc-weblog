@@ -1,0 +1,83 @@
+﻿@model PagedResult<ArticleListDto>
+<section class="container py-5">
+
+    @if (!Model.Items.Any())
+    {
+        <h4 class="text-light text-bg-danger p-2 rounded text-center">
+            هیچ مقاله‌ای موجود نیست
+        </h4>
+    }
+    else
+    {
+        <h2 class="text-center mb-4 fw-bold text-primary">
+            دسته بندی: @(Model.Items.FirstOrDefault()?.CategoryName)
+        </h2>
+
+        <div class="row justify-content-center">
+            @foreach (var article in Model.Items)
+            {
+                <div class="col-lg-8 col-md-10 col-12 mb-4 d-flex justify-content-center">
+                    <div class="card article-card shadow-sm w-100" style="max-width: 900px;">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-md-4">
+                                <img src="@article.ImagePath"
+                                     class="img-fluid rounded-start article-img"
+                                     alt="@article.Title" />
+                            </div>
+
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h3 class="card-title fw-bold">@article.Title</h3>
+
+                                    <p class="card-text text-muted">@article.ShortDescription</p>
+
+                                    <p class="mb-2"><strong>موضوع:</strong> @article.CategoryName</p>
+                                    <p class="mb-2"><strong>نویسنده:</strong> @article.PersonUserName</p>
+                                    <p class="mb-1"><strong>تاریخ درج:</strong> @article.InsertDate.ToShamsi()</p>
+                                    <p class="mb-2"><strong>تعداد بازدید:</strong> @article.VisitCount</p>
+
+                                    <a asp-controller="Article"
+                                       asp-action="ShowArticle"
+                                       asp-route-id="@article.Id"
+                                       class="btn btn-primary px-4 mt-2">
+                                        ادامه مطلب
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <!-- PAGE PAGINATION -->
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+
+                <!-- Prev -->
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link"
+                       href="@Url.Action("ShowArticlesByCategoryId", "Article", new { categoryId = ViewBag.CategoryId, page = Model.CurrentPage - 1 })">قبلی</a>
+                </li>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("ShowArticlesByCategoryId", "Article", new { categoryId = ViewBag.CategoryId, page = i })">@i</a>
+                    </li>
+                }
+
+                <!-- Next -->
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link"
+                       href="@Url.Action("ShowArticlesByCategoryId", "Article", new { categoryId = ViewBag.CategoryId, page = Model.CurrentPage + 1 })">بعدی</a>
+                </li>
+
+            </ul>
+        </nav>
+    }
+</section>

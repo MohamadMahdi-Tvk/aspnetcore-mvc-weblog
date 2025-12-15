@@ -1,0 +1,60 @@
+﻿@model List<CommentDto>
+
+<div id="commentsArticle1" class="section card p-4">
+    <h4 class="mb-3">کامنت‌ها</h4>
+
+    @if (!Model.Any())
+    {
+        <h5 class="text-light p-1 text-bg-danger rounded-4 text-center">کامنتی برای این مقاله وجود ندارد</h5>
+    }
+
+    <ul class="list-group mb-3">
+
+        @foreach (var comment in Model)
+        {
+            @if (comment.IsApproved == true)
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    @comment.PersonUserName @comment.Text
+                    <span>
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-action="ReplayComment"
+                           asp-route-articleId="@comment.ArticleId"
+                           asp-route-parentId="@comment.Id"
+                           asp-route-personId="@comment.PersonId">
+                            پاسخ
+                        </a>
+                        <a class="btn btn-sm btn-outline-success"
+                           asp-action="RemoveComment" asp-route-Id="@comment.Id" , asp-route-articleId="@comment.ArticleId">
+                            فعال
+                        </a>
+                    </span>
+                </li>
+            }
+            else
+            {
+                <li class="list-group-item d-flex justify-content-between">
+                    @comment.PersonUserName @comment.Text
+                    <span>
+                        <a class="btn btn-sm btn-outline-primary"
+                           asp-action="ReplayComment"
+                           asp-route-articleId="@comment.ArticleId"
+                           asp-route-parentId="@comment.Id"
+                           asp-route-personId="@comment.PersonId">
+                            پاسخ
+                        </a>
+                        <a class="btn btn-sm btn-outline-danger"
+                           asp-action="RemoveComment" asp-route-Id="@comment.Id" , asp-route-articleId="@comment.ArticleId">
+                            غیرفعال
+                        </a>
+                    </span>
+                </li>
+            }
+            
+
+
+        }
+
+    </ul>
+</div>
+

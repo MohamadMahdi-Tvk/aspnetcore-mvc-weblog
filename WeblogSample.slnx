@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="WeblogSample.CoreLayer/WeblogSample.Service.csproj" />
+  <Project Path="WeblogSample.DataLayer/WeblogSample.Data.csproj" />
+  <Project Path="WeblogSample.WebApp/WeblogSample.WebApp.csproj" />
+</Solution>

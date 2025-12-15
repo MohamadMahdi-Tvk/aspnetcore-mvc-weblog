@@ -1,0 +1,48 @@
+﻿<header class="shadow-sm bg-white">
+    <nav class="navbar navbar-expand-lg navbar-light py-2">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold text-primary" asp-controller="Home" asp-action="Index">وبلاگ من</a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link text-success" asp-controller="Account" asp-action="Login">ورود/ثبت نام</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link text-danger" asp-controller="Account" asp-action="Logout">خروج از حساب کاربری</a>
+                        }
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="admin" asp-controller="Home" asp-action="Index">پنل ادمین</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-none" href="#">خروج</a>
+                    </li>
+
+                    @await Component.InvokeAsync("Categories")
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="AboutUs">درباره ما</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <button id="themeToggle" class="btn btn-outline-secondary ms-3">
+            🌙 حالت شب
+        </button>
+    </nav>
+</header>

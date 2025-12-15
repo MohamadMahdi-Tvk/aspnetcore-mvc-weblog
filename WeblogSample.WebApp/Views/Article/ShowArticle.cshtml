@@ -1,0 +1,100 @@
+﻿@model ArticleDetailDto
+
+@{
+    Layout = "_ArticleLayout";
+}
+
+
+<div class="container py-5">
+
+    <div class="card shadow-lg mb-5 article-card">
+        <img src="@Model.ImagePath"
+             class="card-img-top article-img"
+             alt="Article Image" />
+
+        <div class="card-body">
+            <h1 class="card-title fw-bold mb-3">@Model.Title</h1>
+
+
+            <div class="d-flex flex-wrap text-muted mb-4">
+                <span class="me-3"><i class="bi bi-person"></i> نویسنده: @Model.AuthorName</span>
+                <span class="me-3"><i class="bi bi-calendar"></i> تاریخ: @Model.InsertDate.ToShamsi()</span>
+                <span><i class="bi bi-tag"></i> موضوع: @Model.CategoryName</span>
+            </div>
+
+            <p class="article-text">
+                @Model.Description
+            </p>
+            <a asp-controller="Article"
+               asp-action="DownloadPdf"
+               asp-route-id="@Model.Id"
+               class="btn btn-danger">
+                <i class="bi bi-file-earmark-pdf"></i> دانلود PDF
+            </a>
+        </div>
+    </div>
+
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="card shadow mb-5">
+            <div class="card-header bg-primary text-white fw-bold">
+                نظرات کاربران
+            </div>
+
+            <div class="card-body">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="comment-box mb-4">
+                        <div class="d-flex">
+                            <div class="comment-avatar">
+                                @comment.PersonUserName.Substring(0, 1)
+                            </div>
+                            <div>
+                                <h6 class="fw-bold mb-1">@comment.PersonUserName</h6>
+                                <p class="mb-1">@comment.Text</p>
+
+                                @foreach (var reply in comment.Replies)
+                                {
+                                    <div class="reply-box mt-2">
+                                        <strong class="text-primary">@reply.PersonUserName:</strong>
+                                        <p class="mb-0">@reply.Text</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                <hr />
+
+                <h5 class="fw-bold mb-3">ارسال نظر جدید</h5>
+
+                @await Html.PartialAsync("_CommentForm", new AddCommentViewModel { ArticleId = Model.Id })
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <h6 class="text-primary">
+            برای ارسال نظر باید <a class="link-info text-decoration-none" asp-controller="Account" asp-action="Register">ثبت نام</a>
+            یا
+            <a class="link-info text-decoration-none" asp-controller="Account" asp-action="Login">ورود</a>
+            کنید ...
+        </h6>
+    }
+
+</div>
+
+<script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script>
+
+    document.getElementById("darkToggle").onclick = function () {
+      document.body.classList.toggle("dark-mode");
+    };
+
+</script>
+
+

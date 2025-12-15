@@ -1,0 +1,113 @@
+/* Thumbnail in sidebar */
+.post-thumb {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+}
+
+/* Article image */
+.article-img {
+  height: 200px;
+  object-fit: cover;
+}
+
+.article-card {
+  transition: 0.3s ease;
+}
+
+.article-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .article-img {
+    height: 220px;
+    width: 100%;
+  }
+
+  .post-thumb {
+    width: 60px;
+    height: 45px;
+  }
+
+  .small-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .post-thumb {
+    width: 50px;
+    height: 38px;
+  }
+
+  .small-text {
+    font-size: 13px;
+  }
+}
+
+/* ----------- DARK MODE ----------- */
+
+.dark-mode {
+  background-color: #1d1f21 !important;
+  color: #e6e6e6 !important;
+}
+
+.dark-mode p{
+  color: #ffeeee !important;
+}
+
+/* Navbar */
+.dark-mode .navbar {
+  background-color: #2a2c2e !important;
+}
+
+.dark-mode .nav-link {
+  color: #cfcfcf !important;
+}
+
+.dark-mode .nav-link.active {
+  color: #66b3ff !important;
+}
+
+/* Sidebar box */
+.dark-mode aside .bg-white {
+  background-color: #2a2c2e !important;
+  color: #e6e6e6 !important;
+}
+
+/* Popular post box */
+.dark-mode .popular-post a {
+  color: #80c4ff !important;
+}
+
+/* Article card */
+.dark-mode .article-card {
+  background-color: #2a2c2e !important;
+  color: #ddd !important;
+  border-color: #3a3c3e !important;
+}
+
+.dark-mode .article-card:hover {
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.1);
+}
+
+/* Pagination */
+.dark-mode .page-link {
+  background-color: #2a2c2e !important;
+  color: #ddd !important;
+  border-color: #444 !important;
+}
+
+.dark-mode .page-item.active .page-link {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+}
+
+/* Footer */
+.dark-mode footer {
+  background-color: #2a2c2e;
+  color: #aaa;
+}

@@ -1,0 +1,32 @@
+﻿@model AddCommentViewModel
+
+<form id="commentForm" asp-controller="Article" asp-action="AddComment" method="post">
+    <input type="hidden" name="ArticleId" value="@Model.ArticleId" />
+
+    <div class="mb-3">
+        <label class="form-label">نام شما</label>
+        <input type="text" class="form-control" value="@User.Identity.Name" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">متن نظر</label>
+        <textarea id="commentText" name="Text" class="form-control" rows="4"></textarea>
+        <span id="commentError" class="text-danger" style="display:none;">متن نظر نمی‌تواند خالی باشد.</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ارسال نظر</button>
+</form>
+
+<script>
+    document.getElementById("commentForm").addEventListener("submit", function(event) {
+        var text = document.getElementById("commentText").value.trim();
+        var errorSpan = document.getElementById("commentError");
+
+        if (text === "") {
+            event.preventDefault(); 
+            errorSpan.style.display = "block";
+        } else {
+            errorSpan.style.display = "none";
+        }
+    });
+</script>

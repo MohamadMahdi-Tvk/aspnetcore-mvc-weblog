@@ -1,0 +1,41 @@
+﻿@model List<ArticleListDto>
+
+<div id="articleList" class="section card p-4">
+    <h4 class="mb-3">لیست مقالات</h4>
+
+    @foreach(var article in Model)
+    {
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+                @article.Title
+                <span>
+                    <a class="btn btn-sm btn-outline-info"
+                       asp-controller="Comment" asp-action="CommentList" asp-route-Id="@article.Id">
+                        نمایش کامنت‌ها
+                    </a>
+
+                    <a class="btn btn-sm btn-outline-warning"
+                            asp-action="UpdateArticle" asp-route-Id="@article.Id">
+                        ویرایش
+                    </a>
+                    @if (article.IsActive == true)
+                    {
+                        <a class="btn btn-sm btn-outline-success"
+                           asp-action="ToggleArticleStatus" asp-route-Id="@article.Id">
+                           فعال
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sm btn-outline-danger"
+                           asp-action="ToggleArticleStatus" asp-route-Id="@article.Id">
+                            غیرفعال
+                        </a>
+                    }                
+                </span>
+            </li>
+        </ul>
+    }
+
+    
+</div>
